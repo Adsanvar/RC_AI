@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- format is [pkg_name] [pkg_node_name] [unique_node name]-->
+  <node pkg="xbox_driver" type="xbox_driver_node" name="xbox_driver" output="screen" >
+    <!-- Enter Parameters here... -->
+  </node>
+
+</launch>
