@@ -30,7 +30,7 @@ namespace xbox_driver{
 
     //Publishers
     ros::Publisher pub_xbox_joy_cmds_;
-
+    
     //Functions
     void msgCallbackJoystick(const sensor_msgs::Joy::ConstPtr& msg);
     

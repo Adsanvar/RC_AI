@@ -8,4 +8,8 @@
     <param name="deadzone" value="0.15" />
   </node>
 
+  <node respawn="true" pkg="xbox_driver" type="xbox_driver_node" name="xbox_joy_publisher" output="screen" >
+
+  </node>
+
 </launch>
