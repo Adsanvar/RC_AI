@@ -6,6 +6,9 @@
 
 //ROS header
 #include <ros/ros.h>
+#include <sensor_msgs/Joy.h>
+#include <std_msgs/Bool.h>
+#include "xbox_driver/XboxInterface.h"
 
 //Namespace commonly matches ROS package name
 namespace xbox_driver{
@@ -16,7 +19,21 @@ namespace xbox_driver{
       Xbox(ros::NodeHandle& n, ros::NodeHandle& pn);
 
     private:
-      //Node-specific stuff here.
+    //Node-specific stuff here.
+
+    //Variables
+    xbox_driver::XboxInterface xbox_msg;
+    std::string node_name_;
+
+    //Subscribers
+    ros::Subscriber sub_joystick_;
+
+    //Publishers
+    ros::Publisher pub_xbox_joy_cmds_;
+
+    //Functions
+    void msgCallbackJoystick(const sensor_msgs::Joy::ConstPtr& msg);
+    
   };
 
 }
