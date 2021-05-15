@@ -9,7 +9,6 @@ project(perception)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  plc_ros
   roscpp
   rospy
   sensor_msgs

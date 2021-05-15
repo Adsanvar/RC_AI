@@ -10,7 +10,6 @@ project(visualization)
 find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
   geometry_msgs
-  plc_ros
   roscpp
   rospy
   sensor_msgs
