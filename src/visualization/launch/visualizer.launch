@@ -5,7 +5,7 @@
   <arg name="urdf_model" default="pacifica" />
 
     <!-- Launch visualization tool -->
-  <node pkg="rviz" type="rviz" name="offline_rviz" respawn="true" />
+  <node pkg="rviz" type="rviz" name="offline_rviz" respawn="true" args="-d $(find visualization)/rviz/visualization.rviz"/>
 
   <!-- load URDF data from a file to the parameter server -->
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find visualization)/urdf/$(arg urdf_model).urdf.xacro" />
