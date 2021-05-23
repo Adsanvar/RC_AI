@@ -9,11 +9,15 @@ namespace xbox_driver
   {
     node_name_ = ros::this_node::getName();
 
+    //Define timer(s)
+    heartbeat_timer_ = n.createTimer(ros::Duration(1), &Xbox::HeartbeatTimerCallback, this);
+
     //Define Subscribers
     sub_joystick_ = n.subscribe<sensor_msgs::Joy>("/joy", 10, &Xbox::msgCallbackJoystick, this);
 
     //Define Publishers
-    pub_xbox_joy_cmds_ = n.advertise<xbox_driver::XboxInterface>("/xbox_joy_cmds", 10);
+    pub_xbox_joy_cmds_ = n.advertise<xbox_driver::XboxInterface>(node_name_ + "/xbox_joy_cmds", 10);
+    pub_xbox_joy_heartbeat_ = n.advertise<std_msgs::Bool>(node_name_ + "/heartbeat", 1);
 
     ROS_INFO("This node is running successfully"); //Print to console
   }
@@ -33,5 +37,13 @@ namespace xbox_driver
 
     //Publish Message
     pub_xbox_joy_cmds_.publish(xbox_msg);
+  }
+
+  void Xbox::HeartbeatTimerCallback(const ros::TimerEvent& event)
+  {
+    //Publish Message
+    std_msgs::Bool temp;
+    temp.data = true;
+    pub_xbox_joy_heartbeat_.publish(temp);
   }
 }

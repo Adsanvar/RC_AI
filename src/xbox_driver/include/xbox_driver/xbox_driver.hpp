@@ -24,15 +24,18 @@ namespace xbox_driver{
     //Variables
     xbox_driver::XboxInterface xbox_msg;
     std::string node_name_;
+    ros::Timer heartbeat_timer_;
 
     //Subscribers
     ros::Subscriber sub_joystick_;
 
     //Publishers
     ros::Publisher pub_xbox_joy_cmds_;
+    ros::Publisher pub_xbox_joy_heartbeat_;
     
     //Functions
     void msgCallbackJoystick(const sensor_msgs::Joy::ConstPtr& msg);
+    void HeartbeatTimerCallback(const ros::TimerEvent& event);
     
   };
 
