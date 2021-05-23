@@ -26,6 +26,10 @@ This node interfaces directly with the vehicle_controller package in this projec
 
 #### Published Topics
 
+* **`~/heartbeat`** ([std_msgs/Bool])
+
+  Heartbool message to indicate joystick connection status.
+
 * **`~/xbox_joy_cmds`** ([xbox_driver/XboxInterface])
 
   Custom message that remaps controller input for `/joy` topic to user friendly vehicle commands. See screenshot above. The message contains the variables listed below.
@@ -59,4 +63,5 @@ TBD
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 
+[std_msgs/Bool]:https://docs.ros.org/en/api/std_msgs/html/msg/Bool.html
 [sensor_msgs/Joy]:https://docs.ros.org/en/api/sensor_msgs/html/msg/Joy.html
