@@ -3,8 +3,7 @@
 #ifndef XBOX_H
 #define XBOX_H
 
-
-//ROS header
+//ROS Libraries
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>
 #include <std_msgs/Bool.h>
@@ -25,6 +24,11 @@ namespace xbox_driver{
     xbox_driver::XboxInterface xbox_msg;
     std::string node_name_;
     ros::Timer heartbeat_timer_;
+    std_msgs::Bool heartbeat_;
+    uint8_t count_;
+    uint8_t count_prev_;
+    bool joy_idle_lt_;
+    bool joy_idle_rt_;
 
     //Subscribers
     ros::Subscriber sub_joystick_;
@@ -32,11 +36,11 @@ namespace xbox_driver{
     //Publishers
     ros::Publisher pub_xbox_joy_cmds_;
     ros::Publisher pub_xbox_joy_heartbeat_;
-    
+
     //Functions
     void msgCallbackJoystick(const sensor_msgs::Joy::ConstPtr& msg);
     void HeartbeatTimerCallback(const ros::TimerEvent& event);
-    
+
   };
 
 }

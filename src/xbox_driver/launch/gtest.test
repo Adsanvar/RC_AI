@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <test test-name"Unit-Tests" pkg="xbox_driver" type="test_joystick_input" name="RandomName" />
+</launch>
