@@ -33,15 +33,16 @@ This node interfaces directly with the vehicle_controller package in this projec
 * **`~/xbox_joy_cmds`** ([xbox_driver/XboxInterface])
 
   Custom message that remaps controller input for `/joy` topic to user friendly vehicle commands. See screenshot above. The message contains the variables listed below.
-  - Reverse [bool]
-  - Park [bool]
-  - Neutral [bool]
-  - Drive [bool]
-  - ClearFaults [bool]
-  - Ignition [bool]
-  - Throttle [float32]
-  - Brake  [float32]
-  - Steering  [float32]
+  - [bool] Reverse
+  - [bool] Park [bool]
+  - [bool] Neutral [bool]
+  - [bool] Drive [bool]
+  - [bool] ClearFaults [bool]
+  - [bool] Ignition [bool]
+  - [bool] Estop [bool]
+  - [float32] Throttle
+  - [float32] Brake
+  - [float32] Steering
 
 #### Parameters
 
