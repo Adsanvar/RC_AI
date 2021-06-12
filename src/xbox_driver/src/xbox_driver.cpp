@@ -71,6 +71,9 @@ namespace xbox_driver
       heartbeat_.data = true;
     }else{
       heartbeat_.data = false;
+      //Reset controller idle state(s)
+      joy_idle_lt_ = true;
+      joy_idle_rt_ = true;
     }
     count_prev_ = count_;
     pub_xbox_joy_heartbeat_.publish(heartbeat_);
