@@ -70,6 +70,7 @@ namespace xbox_driver
     if (count_ != count_prev_){
       heartbeat_.data = true;
     }else{
+      ROS_WARN("Joystick has been disconnected!"); //Print to console
       heartbeat_.data = false;
       //Reset controller idle state(s)
       joy_idle_lt_ = true;
