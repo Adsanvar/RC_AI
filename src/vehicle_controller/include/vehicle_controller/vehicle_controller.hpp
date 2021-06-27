@@ -10,7 +10,7 @@
 #include <std_msgs/Float32.h>
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/TwistStamped.h>
-#include <geometry_msgs/Vector3.h>
+#include <geometry_msgs/Vector3Stamped.h>
 #include "xbox_driver/XboxInterface.h"
 
 //Namespace commonly matches ROS package name
@@ -43,7 +43,7 @@ namespace vehicle_controller{
       //Functions
       void msgCallbackXboxCmds(const xbox_driver::XboxInterface::ConstPtr& msg);
       //void msgCallbackPubMarker(const visualization_msgs::Marker::ConstPtr& msg);
-      void msgCallbackVehicleDynamics(const geometry_msgs::Vector3::ConstPtr& msg);
+      void msgCallbackVehicleDynamics(const geometry_msgs::Vector3Stamped::ConstPtr& msg);
 
   };
 

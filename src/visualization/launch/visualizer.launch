@@ -9,7 +9,7 @@
 
   <!-- load URDF data from a file to the parameter server -->
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find visualization)/urdf/$(arg urdf_model).urdf.xacro" />
-  
+
   <!-- Publish the state of a robot to tf2. Once published, its available to all components in the system that also use tf2 -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
@@ -18,10 +18,20 @@
   <!-- Specify all TF transforms here -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_fl" args="3.08 0.77 0 0 0 0 base_link steer_fl" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_fr" args="3.08 -0.77 0 0 0 0 base_link steer_fr" />
-	<node pkg="tf2_ros" type="static_transform_publisher" name="steerfl_to_wheelfl" args="0 0 0 3.1415 0 1.5708 steer_fl wheel_fl" /> 
+	<node pkg="tf2_ros" type="static_transform_publisher" name="steerfl_to_wheelfl" args="0 0 0 3.1415 0 1.5708 steer_fl wheel_fl" />
 	<node pkg="tf2_ros" type="static_transform_publisher" name="steerfr_to_wheelfr" args="0 0 0 3.1415 0 1.5708 steer_fr wheel_fr" />
   <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_wheelrl" args="0 0.77 0 3.1415 0 1.5708 base_link wheel_rl" />
 	<node pkg="tf2_ros" type="static_transform_publisher" name="base_to_wheelrr" args="0 -0.77 0 3.1415 0 1.5708 base_link wheel_rr" />
 	<node pkg="tf2_ros" type="static_transform_publisher" name="base_to_foot" args="0 0 0 0 0 0 map base_footprint" />
+
+  <!-- Run Xbox Driver Node -->
+  <include file="$(find xbox_driver)/launch/xbox_joy_interface.launch"/>
+
+  <!--Run Vehicle Controller Node-->
+  <node pkg="vehicle_controller" type="vehicle_controller_node" name="vehicle_controller"/>
+
+  <!-- Run Vehicle Simulator-->
+  <node pkg="rcai_simulinkmodel" type="rcai_simulinkmodel_node" name="vehicle_model"/>
+
 
 </launch>

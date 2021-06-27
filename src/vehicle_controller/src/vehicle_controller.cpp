@@ -11,12 +11,12 @@ namespace vehicle_controller
     node_name_ = ros::this_node::getName();
 
     //Define Subscribers
-    sub_xbox_joy_cmds_ = n.subscribe<xbox_driver::XboxInterface>("/xbox_joy_cmds", 10, &Controls::msgCallbackXboxCmds, this);
-    sub_vehicle_dynamics_ = n.subscribe<geometry_msgs::Vector3>("/vehicle_dynamics", 10, &Controls::msgCallbackVehicleDynamics, this);
+    sub_xbox_joy_cmds_ = n.subscribe<xbox_driver::XboxInterface>("xbox_joy_cmds", 10, &Controls::msgCallbackXboxCmds, this);
+    sub_vehicle_dynamics_ = n.subscribe<geometry_msgs::Vector3Stamped>("/vehicle_dynamics", 10, &Controls::msgCallbackVehicleDynamics, this);
 
     //Define Publishers
     pub_mobility_cmd_ = n.advertise<geometry_msgs::TwistStamped>("/MobilityCmd", 10);
-    pub_vehicle_marker_ = n.advertise<geometry_msgs::TwistStamped>("/VehicleMarker", 10);
+    pub_vehicle_marker_ = n.advertise<visualization_msgs::Marker>("/VehicleMarker", 10);
 
     ROS_INFO("This node is running successfully"); //Print to console
   }
@@ -39,8 +39,7 @@ namespace vehicle_controller
     //Need to create and update state machine based on controller inputs
 
     //Get ROS time
-    ros::Time timestamp = ros::Time::now();
-    vehicle_twist_.header.stamp = timestamp;
+    vehicle_twist_.header.stamp = ros::Time::now();
 
     vehicle_twist_.twist.linear.x = msg->Throttle;
     vehicle_twist_.twist.angular.z = msg->Steering;
@@ -72,14 +71,14 @@ namespace vehicle_controller
 }
 
   //Publisher Callback for Visualization of Marker in Rviz
-  void Controls::msgCallbackVehicleDynamics(const geometry_msgs::Vector3::ConstPtr& msg)
+  void Controls::msgCallbackVehicleDynamics(const geometry_msgs::Vector3Stamped::ConstPtr& msg)
   {
 
     //Get ROS time
     vehicle_marker_.header.stamp = ros::Time::now();
 
     //Select Marker Parameters
-    vehicle_marker_.header.frame_id = "/my_frame";
+    vehicle_marker_.header.frame_id = "/base_link";
 
     vehicle_marker_.ns = "basic_shapes";
     vehicle_marker_.id = 0;
@@ -91,8 +90,8 @@ namespace vehicle_controller
     vehicle_marker_.action = visualization_msgs::Marker::ADD;
 
     // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-    vehicle_marker_.pose.position.x = msg->x;
-    vehicle_marker_.pose.position.y = msg->y;
+    vehicle_marker_.pose.position.x = msg->vector.x;
+    vehicle_marker_.pose.position.y = msg->vector.y;
     vehicle_marker_.pose.position.z = 1;
     vehicle_marker_.pose.orientation.x = 0.0;
     vehicle_marker_.pose.orientation.y = 0.0;
@@ -102,7 +101,7 @@ namespace vehicle_controller
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
     vehicle_marker_.scale.x = 2.0;
     vehicle_marker_.scale.y = 1.0;
-    vehicle_marker_.scale.z = 1.0;
+    vehicle_marker_.scale.z = 0.0;
 
     // Set the color -- be sure to set alpha to something non-zero!
     vehicle_marker_.color.r = 0.0f;
