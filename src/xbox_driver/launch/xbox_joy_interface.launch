@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="joystick_port" default="js0"/> <!--Port that controller is connected to -->
+
+  <!-- format is [pkg_name] [pkg_node_name] [unique_node name]-->
+  <node respawn="true" pkg="joy" type="joy_node" name="xbox_joy_listener" output="screen" >
+    <param name="dev" type="string" value="/dev/input/$(arg joystick_port)" />
+    <param name="deadzone" value="0.15" />
+    <param name="autorepeat_rate" value="20" />
+  </node>
+
+  <node respawn="true" pkg="xbox_driver" type="xbox_driver_node" name="xbox_joy_publisher" output="screen" >
+
+  </node>
+
+</launch>
