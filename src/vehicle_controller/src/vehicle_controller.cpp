@@ -101,7 +101,7 @@ namespace vehicle_controller
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
     vehicle_marker_.scale.x = 2.0;
     vehicle_marker_.scale.y = 1.0;
-    vehicle_marker_.scale.z = 0.0;
+    vehicle_marker_.scale.z = 1.0;
 
     // Set the color -- be sure to set alpha to something non-zero!
     vehicle_marker_.color.r = 0.0f;
