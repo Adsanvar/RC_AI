@@ -11,7 +11,7 @@ namespace vehicle_controller
     node_name_ = ros::this_node::getName();
 
     //Define Subscribers
-    sub_xbox_joy_cmds_ = n.subscribe<xbox_driver::XboxInterface>("xbox_joy_cmds", 10, &Controls::msgCallbackXboxCmds, this);
+    sub_xbox_joy_cmds_ = n.subscribe<xbox_driver::XboxInterface>("/xbox_joy_publisher/xbox_joy_cmds", 10, &Controls::msgCallbackXboxCmds, this);
     sub_vehicle_dynamics_ = n.subscribe<geometry_msgs::Vector3Stamped>("/vehicle_dynamics", 10, &Controls::msgCallbackVehicleDynamics, this);
 
     //Define Publishers
@@ -78,7 +78,7 @@ namespace vehicle_controller
     vehicle_marker_.header.stamp = ros::Time::now();
 
     //Select Marker Parameters
-    vehicle_marker_.header.frame_id = "/base_link";
+    vehicle_marker_.header.frame_id = "base_link";
 
     vehicle_marker_.ns = "basic_shapes";
     vehicle_marker_.id = 0;
